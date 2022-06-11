@@ -1,0 +1,16 @@
+.container{
+    background-color: rgb(8, 8, 8);
+    margin-bottom: 30px;
+    color :rgb(213, 213, 228);
+    height: 200%;
+    
+}
+.form{
+    
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.Himg{
+    height: 100%;
+    width: 100%;
+}

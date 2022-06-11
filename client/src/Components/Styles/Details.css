@@ -1,0 +1,14 @@
+.back{
+    background-color: rgb(17, 17, 17);
+    margin-bottom: 30px;
+    color :rgb(45, 45, 194)
+}
+.fullimg{
+    height: 60%;
+    width: 60%;
+}
+.gen{
+    color: aliceblue;
+    flex-direction: row;
+    margin: 10px;
+}

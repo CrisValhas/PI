@@ -1,3 +1,4 @@
+
 const initialState = {
     allVideogames: [],
     videogames: [],
@@ -24,7 +25,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 videogames: action.payload, /* este para ir poniendole los filtros */
                 allVideogames: action.payload, /* FUNCIONA */
-                details: []
+                details: [],
             }
         case "GET_VIDEOGAMES_BY_NAME":
             return {

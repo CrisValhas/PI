@@ -147,7 +147,7 @@ const getAll = async (req, res) => {
             res.status(200).send(paginadoVideogames);
         }
     } catch (err) {
-        console.log(err);
+        res.status(405).send(err);
     }
 }
 

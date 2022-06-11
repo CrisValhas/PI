@@ -1,0 +1,71 @@
+.card {
+    background-color: rgb(17, 17, 17);
+    margin: 20px;
+    box-shadow: 2px 2px 5px rgba(211, 148, 13, 0.37);
+    width: 20rem;
+    height: 23rem;
+    
+    border-radius: 3%;
+    border-width: 6%;
+    border-color: rgb(26, 91, 134);
+    border-style:solid;
+    display: row;
+    justify-content:flex-end;
+    
+}
+.card:hover{
+    margin: 19px;
+    box-shadow: 2px 2px 5px rgba(26, 104, 177, 0.705);
+    width: 21rem;
+    height: 23rem;
+    box-decoration-break: slice;
+    background-color: rgba(26, 26, 26, 0.884);
+    border-radius: 3%;
+    border-width: 9%;
+    border-color: rgb(199, 156, 14);
+    border-style:solid;
+    align-items: center;
+    transition: 10ms;
+    background: linear-gradient(-45deg, #eed752, #e3f829, #d52323, #ffa723);
+    background-size: 200% 200%;
+    animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+img.src{
+    image-resolution:inherit;
+    width: 20rem;
+    height: 10rem;
+    border-radius: 2%;
+    
+}
+.btn-danger{
+    justify-content: end;
+}
+.details{
+    position: flex-end;
+    font-size: 20px;
+    color: rgb(51, 118, 177);
+}
+.name{
+    margin-top:30px;
+    color: aliceblue;
+    font-size: 22px;
+    font-family: monospace;
+}
+.genres{
+    display: inline;
+    margin: 5px;
+    font-size: 20px;
+}

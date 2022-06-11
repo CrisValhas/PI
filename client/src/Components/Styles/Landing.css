@@ -1,0 +1,72 @@
+.landingImg {
+    width: 15%;
+    height: 15%;
+    background-image: url('../../Media/start.png');
+    background-position: center;
+    background-size: cover;
+    margin-top:  40%;
+    position: relative;
+    border-radius: 5px;
+    border-style: inset;
+    
+}
+.landingImg:hover {
+    background-color: rgba(255, 196, 0, 0.637);
+    transition: background-color .5s;
+}
+.landing{
+    background-color: #000000;
+    height: 100vh;
+    color: #e953c4;
+}
+.btn_home{
+    position: center;
+    background-color: #e953c4;
+    font-size: 30px;
+    padding: 6px 16px;
+    min-width: 64px;
+    font-weight: bold;
+    font-family:monospace;
+    border-style:outset;
+    border-color: aliceblue;
+    color: aqua;
+    margin-top: 40%;
+
+
+
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 10px;
+
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding: 0rem;
+    border: 10%;
+    border-color: azure;
+    margin-bottom: 0rem;
+    font-weight: bold;
+    font-family:monospace;
+}
+.bg {
+    width: 100%;
+    height: 100%;
+    background-image: url('../../Media/HA-DO-KEN.jpg');
+    background-position: center;
+    background-size: cover;
+    
+}
+.DmcImg {
+    width: 12%;
+    height: 12%;
+    background-position: center;
+    background-size: cover;
+    margin-top:  30rem;
+    position: relative;
+    animation: alternate;
+}

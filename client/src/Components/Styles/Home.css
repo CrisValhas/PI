@@ -1,0 +1,62 @@
+.Gview{
+background: url(../../Media/Home_Background.jpg) ;
+background-position: center;
+background-size: cover;
+background-attachment: fixed; 
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+background-size: 100% 100%;
+
+};
+
+.details{
+color: aliceblue;
+text-decoration: aliceblue;
+text-decoration-color: aliceblue;
+}
+.searchbar{
+    background-color: black;
+    
+}
+.genres{
+    color: aliceblue;
+    font-size: 10px;
+}
+.loading{
+    color: rgb(0, 136, 255);
+    font-family:unset;
+    font-weight: bold;
+    font-size: 50px;
+}
+.dmg{
+    margin-top: 200px;
+
+}
+.input{
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+}
+.sbtn{
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    margin-right: 12px;
+    margin-left: 12px;
+    height: 44px;
+    width: 80px;
+    border-radius: 7px;
+    font-style: oblique;
+    font-weight: bolder;
+}
+.sbtn:hover{
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    margin-right: 12px;
+    margin-left: 12px;
+    height: 46px;
+    width: 84px;
+    border-radius: 7px;
+    font-weight: 200;
+    font-style: oblique;
+    font-weight: bolder;
+}
