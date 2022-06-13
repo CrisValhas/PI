@@ -60,3 +60,17 @@ text-decoration-color: aliceblue;
     font-style: oblique;
     font-weight: bolder;
 }
+.Filters{
+    display: inline-flex;
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    margin: 10px;
+    color :aliceblue;
+    border-radius: 7px;
+
+}
+.stick{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

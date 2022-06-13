@@ -8,7 +8,7 @@ import"./Styles/Details.css";
 export default function Details() {
     let id=useParams("id");
     let dispatch = useDispatch();
-        useEffect (()=>{dispatch(getDetails(id))},[]);
+        useEffect (()=>{dispatch(getDetails(id))});
         let details= useSelector(state => state.details);
                 return (  // details.length === 1 ?  
 <div className="back">

@@ -31,9 +31,9 @@ const createGame = async (req, res,next) => {
             if (newgame){
                 return res.status(404).send("this game is already exist")
             }
-            const newVideogame = await Videogame.create({name,description,release,rating,image,platforms})
-            await newVideogame.addGenres(genre);
-            return res.json(newVideogame);
+            const videogameCreated = await Videogame.create({name,description,release,rating,image,platforms})
+            await videogameCreated.addGenres(genre);
+            return res.json(videogameCreated);
     
         }
         catch(err){
@@ -74,7 +74,8 @@ const searchByIdApi = async (id) => {
 }
 
 const getApi100Videogames = async () => {
-    const apiURL1 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
+    try {
+        const apiURL1 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
     const apiURL2 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2&page_size=40`)
     const apiURL3 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3&page_size=20`)
     const apiURLS = apiURL1.data.results.concat(apiURL2.data.results, apiURL3.data.results)
@@ -87,51 +88,68 @@ const getApi100Videogames = async () => {
             image: e.background_image,
             platforms: e.platforms.map(e => e.platform.name),
             genres: e.genres.map(e => e.name)
-        }
+        };
     })
     /* console.log(apiInfo)  ME TRAE BIEN ACÁ */
     return apiInfo; /* para mostrar en el paginado */
-}
-
-const getDbVideogames = async () => {
-    const prueba =  await Videogame.findAll({
-        include: {
-            model: Genre,
-            attributes: ["name"],
-            through: {
-                attributes: []
-            }
-        }
-    })
-    if (prueba){const final = prueba.map(e => {
-        return{
-            id: e.id,
-            name: e.name,
-            released: e.released,
-            rating: e.rating,
-            image: e.image,
-            platforms: e.platforms,
-        }
-    })
-    return final
+    } catch (error) {
+        return err
     }
     
 }
 
-const getAllVideogames = async () => {
-    const apiInfo = await getApi100Videogames();
-    const dbInfo = await getDbVideogames();
-    const infoTotal = apiInfo.concat(dbInfo);
-    /* console.log(infoTotal) ME TRAE BIEN ACÁ */
-    return infoTotal /* Para mostrar en el paginado revisar si se necesita*/ 
+const getDbVideogames = async () => {
+    try {
+        const prueba =  await Videogame.findAll({
+            include: {
+                model: Genre,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }
+        })
+        if (prueba){const final = prueba.map(e => {
+            return{
+                id: e.id,
+                name: e.name,
+                released: e.released,
+                rating: e.rating,
+                image: e.image,
+                platforms: e.platforms,
+            }
+        })
+        return final
+        }
+    } catch (error) {
+        return (error)
+    }
+    
+    
 }
+
+// const getAllVideogames = async (req, res) => {
+//     try {
+//         const apiInfo = await getApi100Videogames();
+//     const dbInfo = await getDbVideogames();
+//     const infoTotal = apiInfo.concat(dbInfo);
+//     /* console.log(infoTotal) ME TRAE BIEN ACÁ */
+//     return infoTotal /* Para mostrar en el paginado revisar si se necesita*/ 
+//     } catch (error) {
+//         return error
+//     }
+    
+// }
 
 const getAll = async (req, res) => {
     let {name} = req.query;
     try{
-        const allDbVideogames = await getDbVideogames();
-        const paginadoVideogames = await getAllVideogames();
+        // 
+        const apiInfo = await getApi100Videogames();
+        const dbInfo = await getDbVideogames();
+        const infoTotal = apiInfo.concat(dbInfo);
         if(name){
+            const allDbVideogames = await getDbVideogames();
             name = name.toLowerCase();
             const videogamesByNameApi = await getApiVideogamesbyName(name);
             if (allDbVideogames){
@@ -144,7 +162,7 @@ const getAll = async (req, res) => {
             
         }
         else {
-            res.status(200).send(paginadoVideogames);
+            res.status(200).send(infoTotal);
         }
     } catch (err) {
         res.status(405).send(err);
@@ -152,4 +170,4 @@ const getAll = async (req, res) => {
 }
 
 
-module.exports = { getAllVideogames, searchByIdApi, getApiVideogamesbyName, getDbVideogames,createGame,getVideoGamesId,getAll }
+module.exports = { searchByIdApi, getApiVideogamesbyName, getDbVideogames,createGame,getVideoGamesId,getAll }

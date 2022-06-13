@@ -4,59 +4,58 @@ import { useDispatch, useSelector } from 'react-redux';
 import Nav from './Nav';
 import './Styles/CreateVideogames.css';
 
-export function validate(input) {
+function validate(input) {
   let errors = {};
-  if (!input.username) {
-    errors.username = 'Username is required';
-  } else if (!/\S+@\S+\.\S+/.test(input.username)) {
-    errors.username = 'Username is invalid';
+  if (!input.name) {
+      errors.name = "A name is required"
   }
-  if (!input.password) {
-    errors.password = 'Password is required';
-  } else if (!/(?=.*[0-9])/.test(input.password)) {
-    errors.password = 'Password is invalid';
+  if (!input.description) {
+      errors.description = "A description is required"
   }
-
-  return errors;
-};
-
+  if (input.rating > 5) {
+      errors.rating = "The rating is up to 5"
+  }
+  return errors
+  //validate fecha
+  // /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/
+}
 
 export default function CreateVideogame() {
 
   let dispatch=useDispatch();
-  useEffect (()=>{dispatch(getGenres())},[]);
+  useEffect (()=>{dispatch(getGenres())});
   let genres =useSelector(state =>state.genres);
 
 
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
-  name: '',
-  description: '',
-  released:'',
-  rating:'',
-  Genres:'',
-  platforms:'',
+  "name": '',
+  "description": '',
+  "image":"2wCEAAkGBxQRERETFBERFBYWGRgYFhgRERMWFhYXFhYXGBwWFBYZISoiGRsnHBYXIzYkJyswMDAwGCI2OzYvOiovMC0BCwsLDw4PHBERGy8nIigwMTEvMDIzOC0xMC0vMi8vLzAvMS8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vMf",
+  "release":'',
+  "rating":'',
+  "genre":['RPG'],
+  "platforms":['PC'],
 });
 
-const handleclick= e =>{
-  dispatch(postVideogame(input))
-
-}
-
-const handleSubmit = e => {
+const handleclick= (e) =>{
   e.preventDefault()
+  dispatch(postVideogame(input))
+  console.log(input)
+
 }
+
 const handleInputChange = function(e) {
   setInput({
     ...input,
     [e.target.name]: e.target.value
-  })
-  setErrors(validate({
+});
+setErrors(validate({
     ...input,
     [e.target.name]: e.target.value
-    })
-  );
-}
+}))
+  }
+
   return (
     <div className='container'><Nav/>
     <h1>
@@ -64,12 +63,12 @@ const handleInputChange = function(e) {
       </h1>
     <div className='container'> 
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleclick(e)}>
       <div className='all'>
         <div className='form'>
           <label>Name </label>
             <input className={errors.name && 'danger'}
-            type="text" name="name" onChange={handleInputChange} value={input.name} />
+            type="text" name="name" value={input.name} onChange={(e) => handleInputChange(e)} />
             {errors.name && (
               <p className="danger">{errors.name}</p>
             )}
@@ -77,29 +76,29 @@ const handleInputChange = function(e) {
         <div className='form'>
           <label>Description </label>
             <input className={errors.description && 'danger'}
-            type="description" name="description" onChange={handleInputChange} value={input.description} />
+            type="description" name="description" value={input.description} onChange={(e) => handleInputChange(e)} />
             {errors.description && (
               <p className="danger">{errors.description}</p>
             )}
         </div>
         <div className='form'>
           <label>released </label>
-            <input className={errors.released && 'danger'}
-            type="text" name="released" onChange={handleInputChange} value={input.released} />
-            {errors.released && (
-              <p className="danger">{errors.released}</p>
+            <input className={errors.release && 'danger'}
+            type="text" name="release" value={input.release} onChange={(e) => handleInputChange(e)}  />
+            {errors.release && (
+              <p className="danger">{errors.release}</p>
             )}
         </div>
         <div className='form'>
           <label>Rating </label>
             <input className={errors.rating && 'danger'}
-            type="text" name="rating" onChange={handleInputChange} value={input.rating} />
+            type="text" name="rating" value={input.rating} onChange={(e) => handleInputChange(e)} />
             {errors.rating && (
               <p className="danger">{errors.rating}</p>
             )}
             <div className='form'>
             <label>Platforms </label>
-              <select id="opciones" name="opciones">
+              <select  name="Platforms">
                 <option value= "PC" >PC</option>
                 <option value= "PlayStation 5" >PlayStation 5</option>
                 <option value= "PlayStation 4" >PlayStation 4</option>
@@ -126,10 +125,8 @@ const handleInputChange = function(e) {
         
       </div>
       <div className='form'>
-      <button onClick={handleclick}>Create</button>
-
+      <button >Create</button>
       </div>
-        
       </form>
     </div>
     <img className='Himg' src ="https://blog.soyhenry.com/content/images/2021/02/HEADER-BLOG-NEGRO-01.jpg" alt=""></img>

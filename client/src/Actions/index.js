@@ -1,14 +1,5 @@
 import axios from "axios";
 
-export function restart(){
-    return async function(dispatch){
-        var json = null;
-        return dispatch({
-            type: "GET_ALL_VIDEOGAMES",
-            payload: json
-        })
-    }
-}
 export function getAllVideogames(){
     return async function(dispatch){
         try {
