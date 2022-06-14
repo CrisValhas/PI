@@ -13,12 +13,11 @@ export default function Landing()  {
 
         return (
         <div className="landing">
-        <div className="bg">
-                <Link to="/home" style={{ textDecoration: "none" }}>
-                <img className="landingImg" alt=""></img> 
-                </Link>
-                
-        </div>
+                <div className="bg">
+                        <Link to="/home" >
+                                <img className="landingImg" alt=""></img> 
+                        </Link>
+                </div>
         </div>
 );
 }

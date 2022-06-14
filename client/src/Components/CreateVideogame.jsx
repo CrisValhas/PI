@@ -23,26 +23,32 @@ function validate(input) {
 export default function CreateVideogame() {
 
   let dispatch=useDispatch();
-  useEffect (()=>{dispatch(getGenres())});
+  useEffect (()=>{dispatch(getGenres())},[]);
   let genres =useSelector(state =>state.genres);
 
 
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
-  "name": '',
-  "description": '',
-  "image":"2wCEAAkGBxQRERETFBERFBYWGRgYFhgRERMWFhYXFhYXGBwWFBYZISoiGRsnHBYXIzYkJyswMDAwGCI2OzYvOiovMC0BCwsLDw4PHBERGy8nIigwMTEvMDIzOC0xMC0vMi8vLzAvMS8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vMf",
-  "release":'',
-  "rating":'',
-  "genre":['RPG'],
-  "platforms":['PC'],
+  name: "",
+  description: "",
+  image:"",
+  released:"",
+  rating:"",
+  genre:[],
+  platforms:[],
 });
 
 const handleclick= (e) =>{
   e.preventDefault()
   dispatch(postVideogame(input))
-  console.log(input)
 
+
+}
+const handlepush=(e)=>{
+  setInput({
+    ...input,
+    [e.target.name]:[...input[e.target.name],e.target.value]
+  })
 }
 
 const handleInputChange = function(e) {
@@ -58,47 +64,44 @@ setErrors(validate({
 
   return (
     <div className='container'><Nav/>
-    <h1>
-        Add your videogame
-      </h1>
-    <div className='container'> 
-      
-      <form onSubmit={(e) => handleclick(e)}>
-      <div className='all'>
-        <div className='form'>
-          <label>Name </label>
-            <input className={errors.name && 'danger'}
-            type="text" name="name" value={input.name} onChange={(e) => handleInputChange(e)} />
-            {errors.name && (
-              <p className="danger">{errors.name}</p>
-            )}
-        </div>
-        <div className='form'>
-          <label>Description </label>
-            <input className={errors.description && 'danger'}
-            type="description" name="description" value={input.description} onChange={(e) => handleInputChange(e)} />
-            {errors.description && (
-              <p className="danger">{errors.description}</p>
-            )}
-        </div>
-        <div className='form'>
-          <label>released </label>
-            <input className={errors.release && 'danger'}
-            type="text" name="release" value={input.release} onChange={(e) => handleInputChange(e)}  />
-            {errors.release && (
-              <p className="danger">{errors.release}</p>
-            )}
-        </div>
-        <div className='form'>
-          <label>Rating </label>
-            <input className={errors.rating && 'danger'}
-            type="text" name="rating" value={input.rating} onChange={(e) => handleInputChange(e)} />
-            {errors.rating && (
-              <p className="danger">{errors.rating}</p>
-            )}
+      <h1>Add your videogame</h1>
+      <div className='container'> 
+        <form onSubmit={(e) => handleclick(e)}>
+          <div className='all'>
             <div className='form'>
-            <label>Platforms </label>
-              <select  name="Platforms">
+              <label>Name </label>
+              <input className={errors.name && 'danger'}
+                type="text" name="name" value={input.name} onChange={(e) => handleInputChange(e)} />
+                {errors.name && (
+                  <p className="danger">{errors.name}</p>
+                )}
+            </div>
+            <div className='form'>
+              <label>Description </label>
+              <input className={errors.description && 'danger'}
+                type="description" name="description" value={input.description} onChange={(e) => handleInputChange(e)} />
+                {errors.description && (
+                  <p className="danger">{errors.description}</p>
+                )}
+            </div>
+            <div className='form'>
+              <label>released </label>
+              <input className={errors.released && 'danger'}
+                type="text" name="released" value={input.released} onChange={(e) => handleInputChange(e)}  />
+                {errors.released && (
+                  <p className="danger">{errors.released}</p>
+                )}
+            </div>
+            <div className='form'>
+              <label>Rating </label>
+              <input className={errors.rating && 'danger'}
+                type="text" name="rating" value={input.rating} onChange={(e) => handleInputChange(e)} />
+                {errors.rating && (
+                  <p className="danger">{errors.rating}</p>
+                )}
+            <div className='form'>
+              <label>Platforms </label>
+              <select  name="platforms" onChange={(e) => handlepush(e)}>
                 <option value= "PC" >PC</option>
                 <option value= "PlayStation 5" >PlayStation 5</option>
                 <option value= "PlayStation 4" >PlayStation 4</option>
@@ -114,16 +117,15 @@ setErrors(validate({
               </select>
             </div>
             <div className='form'>
-            <label>Genres </label>
-              <select id="opciones" name="opciones">{
+              <label>Genres </label>
+              <select id="opciones" name="genre" onChange={(e) => handlepush(e)}>{
                 genres.length ?genres.map((genres,index) =>
-                            (<option value={genres.name} key={index}>{genres.name}</option>)):<option>sin generos cargados</option>
+                  (<option value={genres.name} key={index}>{genres.name}</option>)):<option>sin generos cargados</option>
                 }
               </select>
             </div>
-        </div>
-        
-      </div>
+            </div>
+          </div>
       <div className='form'>
       <button >Create</button>
       </div>
@@ -132,18 +134,5 @@ setErrors(validate({
     <img className='Himg' src ="https://blog.soyhenry.com/content/images/2021/02/HEADER-BLOG-NEGRO-01.jpg" alt=""></img>
     <div className='form'>enserio pensaste que podias crear un juego ?... para eso unite a Henry picaron...</div>
     </div>)
-}
-<div>
-[ ] Un formulario controlado con JavaScript con los siguientes campos:
-Nombre
-Descripción
-Fecha de lanzamiento
-Rating
-[ ] Posibilidad de seleccionar/agregar varios géneros
-[ ] Posibilidad de seleccionar/agregar varias plataformas
-[ ] Botón/Opción para crear un nuevo videojuego
-Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML.
-Pueden agregar las validaciones que consideren. 
-Por ejemplo: Que el nombre del juego no pueda contener algunos símbolos, que el rating no pueda exceder determinado valor, etc.
-</div>
+};
 

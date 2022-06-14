@@ -23,32 +23,32 @@ function rootReducer(state = initialState, action) {
             doubleFilters = false
             return {
                 ...state,
-                videogames: action.payload, /* este para ir poniendole los filtros */
-                allVideogames: action.payload, /* FUNCIONA */
-                details: [],
+                videogames: action.payload,
+                allVideogames: action.payload,
+                details:[],
                 
             }
         case "GET_VIDEOGAMES_BY_NAME":
             return {
                 ...state,
-                videogames: action.payload, /* FUNCIONA */
+                videogames: action.payload, 
             }
         case "GET_GENRES":
             return {
-                ...state, /* FUNCIONA */
+                ...state,
                 genres: action.payload
             }
         case "POST_VIDEOGAME":
             return {
-                ...state /* FUNCIONA */
+                ...state 
             }
         case "GET_DETAILS":
             return {
-                ...state, /* FUNCIONA */
+                ...state, 
                 details: action.payload,
-                videogames: []
+                // videogames: []
             }
-        case "FILTER_BY_GENRE": /* FUNCIONA */
+        case "FILTER_BY_GENRE": 
             const videogames = state.videogames
             const genrefiltered = []
             filtroByGenre = true
@@ -129,7 +129,7 @@ function rootReducer(state = initialState, action) {
                 }
             }
 
-        case "ORDER_BY_NAME": /* FUNCIONA */
+        case "ORDER_BY_NAME": 
             if (filtroByDbApi === true && doubleFilters === false) {
                 const filteredByDb = state.filteredByDb
                 if (action.payload === "") {

@@ -3,10 +3,7 @@ import"./Styles/Card.css"
 import { Link } from "react-router-dom";
 
 
-export default function Card({ image, name, genres,id}) {
-
-
-
+export default function Card({ image, name, genres,id,Genre}) {
 
     return (
         <div className="card" >
@@ -17,17 +14,15 @@ export default function Card({ image, name, genres,id}) {
                         <div className="name">
                             <p >{name}</p>
                         </div>
-                        <div className="genres">{genres}</div>
+                        <div className="genres">{genres}{Genre}</div>
                     </div>
                     <div className ="details">
                         <Link to={"/videogame/" + id} >
                             <p >More info</p>
                         </Link>
                     </div>
-
-                </div>
-                    
+                </div>    
             </div>
         </div>
     )
-}
+};

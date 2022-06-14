@@ -80,6 +80,7 @@ export function filterByGenre(payload){
 }
 
 export function filterByDborApi(payload){
+    
     return{
         type: "FILTER_BY_DB_OR_API",
         payload

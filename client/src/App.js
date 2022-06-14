@@ -12,7 +12,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-        
           <Route path='/' element={<Landing />}/>
           <Route path='/home' element={<Home/>} />
           <Route path='/videogame' element={<CreateVideogame />} /> 

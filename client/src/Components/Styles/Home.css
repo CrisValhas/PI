@@ -19,6 +19,7 @@ text-decoration-color: aliceblue;
 .searchbar{
     background-color: black;
     
+    
 }
 .genres{
     color: aliceblue;
@@ -48,6 +49,8 @@ text-decoration-color: aliceblue;
     border-radius: 7px;
     font-style: oblique;
     font-weight: bolder;
+    border-color: aliceblue;
+    color: aliceblue;
 }
 .sbtn:hover{
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -73,4 +76,19 @@ text-decoration-color: aliceblue;
     margin-right: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.pnumber{
+    color: aliceblue;
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border-radius: 7px;
+    width: 130%;
+    height: 100%;
+    border-color: aliceblue;
+}
+.pnumber:hover{
+    color: aliceblue;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border-radius: 7px;
+    width: 135%;
+    height: 105%;
 }

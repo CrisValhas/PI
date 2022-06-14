@@ -1,4 +1,3 @@
-require("dotenv").config();
 const axios = require('axios');
 const { Videogame, Genre } = require('../../db.js');
 const { API_KEY } = process.env;
@@ -9,7 +8,7 @@ const getGenres = async (req, res) => {
         const genresApi = getGenresApi.data.results.map(e => e.name)
         genresApi.forEach(e => {
             Genre.findOrCreate({
-                where: { name: e }
+                where: { name: e ,id:e}
             })
         })
         const allGenres = await Genre.findAll();

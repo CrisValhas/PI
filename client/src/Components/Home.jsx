@@ -13,7 +13,7 @@ export default function Home()  {
         let [pagin,setPagin]= useState();
         pagin= useSelector(state => state.videogames);
         const [currentPage, setCurrentPage] = useState(1);
-        const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+        const [videogamesPerPage] = useState(15);
         const indexOfLastVideogame = currentPage * videogamesPerPage; 
         const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage 
         const currentVideogames = pagin.slice(indexOfFirstVideogame, indexOfLastVideogame);
@@ -49,9 +49,16 @@ export default function Home()  {
         
         function handleSortName(e){
                 e.preventDefault();
-                dispatch(orderByName(e.target.value));
-                setCurrentPage(1);
-                setOrder(`Order ${e.target.value}`)
+                // if(e.target.value){
+                        dispatch(orderByName(e.target.value));
+                        setCurrentPage(1);
+                        setOrder(`Order ${e.target.value}`)
+                        //document.getElementById(opciones).value "order by name" set defalt
+                        
+                // }else{
+                //         handleClick(e);
+                        // setOrder(`Order ${e.target.value}`)
+                // }
         }
         
         function handleSortRating(e){
@@ -102,12 +109,12 @@ export default function Home()  {
                         <div>
                                 <div className='Filters'>
                                         <div>
-                                                <button className= "sbtn" onClick={e => handleClick(e)}>Clean</button>
+                                                <button className= "sbtn" onClick={e => handleClick(e)}>Cleaning</button>
                                         </div>
                                         <div className='stick'>
                                                 <label >Genres </label>
                                                 <select id="opciones" onChange={e => handleFilterGenres(e)}>
-                                                        <option value={null} key="n">{null}</option>{
+                                                        <option disabled value={null} key="n">{null}</option>{
                                                         genres.length ?genres.map((genres,index) =>
                                                         (<option value={genres.name} key={index}>{genres.name}</option>)):<option>sin generos cargados</option>
                                                         }
@@ -116,15 +123,15 @@ export default function Home()  {
                                         <div className='stick'>
                                                 <label>Source </label>
                                                 <select id="opciones" onChange={e => handleFilterDbApi(e)}>
-                                                        <option value={null} key="n">{null}</option>
+                                                        <option disabled value={null} key="n">{null}</option>
                                                         <option value= "Api" >Api</option>
                                                         <option value= "Data Base" >Data Base</option>
                                                 </select>
                                         </div>
                                         <div className='stick'>
                                                 <label>Order By Name </label>
-                                                <select id="opciones" onChange={e => handleSortName(e)}>
-                                                        <option value={null} key="n">{null}</option>
+                                                <select defaultValue="order by name" id="opciones" onChange={e => handleSortName(e)}>
+                                                        <option disabled value="order by name" key="n">order by name</option>
                                                         <option value= "A-Z" >A-Z</option>
                                                         <option value= "Z-A" >Z-A</option>
                                                 </select>
@@ -132,7 +139,7 @@ export default function Home()  {
                                         <div className='stick'>
                                                 <label>Order By rating </label>
                                                 <select id="opciones" onChange={e => handleSortRating(e)}>
-                                                        <option value={null} key="n">{null}</option>
+                                                        <option disabled value={null} key="n">{null}</option>
                                                         <option value= "Ascending" >Ascending</option>
                                                         <option value= "Descending" >Descending</option>
                                                 </select>
@@ -148,7 +155,10 @@ export default function Home()  {
                                                 name={e.name} 
                                                 image={e.image} 
                                                 genres={e.genres? e.genres.map((e, index) => 
-                                                        (<p key={index} className="genres">{e}</p>)) : <div>Sin genero asignado</div>}
+                                                        (<p key={index} className="genres">{e}</p>)) : <div></div>}
+                                                
+                                                Genre={e.Genres? e.Genres.map((genre, index) => 
+                                                        (<p key={index} className="genres">{genre.name}</p>)):<div></div>}
                                                 />
                                         </div> ))}
                         </div> 
@@ -162,8 +172,5 @@ export default function Home()  {
                 </div>: <div className='dmg'><img  src={loading} alt="" />
                                 <p className="loading">Loading...</p>
                         </div>
-                                
-                        
                 )
-        
 };
