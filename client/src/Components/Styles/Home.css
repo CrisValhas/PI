@@ -92,3 +92,11 @@ text-decoration-color: aliceblue;
     width: 135%;
     height: 105%;
 }
+.order{
+    color: aliceblue;
+    display: inline-flex;
+}
+.added{
+    margin-left: 10px;
+    margin-right: 10px;
+}

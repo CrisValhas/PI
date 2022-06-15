@@ -3,14 +3,33 @@
     margin-bottom: 30px;
     color :rgb(213, 213, 228);
     height: 200%;
-    
 }
 .form{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     
-    margin-top: 30px;
-    margin-bottom: 30px;
 }
 .Himg{
     height: 100%;
     width: 100%;
+}
+.added{
+display: inline-flex;
+}
+.content{
+
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border-radius: 7px;
+    height: 400px;
+
+}
+.description{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 30%;
+    height: 70px;
 }

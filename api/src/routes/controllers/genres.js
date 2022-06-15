@@ -8,7 +8,7 @@ const getGenres = async (req, res) => {
         const genresApi = getGenresApi.data.results.map(e => e.name)
         genresApi.forEach(e => {
             Genre.findOrCreate({
-                where: { name: e ,id:e}
+                where: { name: e, id: e }
             })
         })
         const allGenres = await Genre.findAll();
@@ -19,4 +19,4 @@ const getGenres = async (req, res) => {
 
 }
 
-module.exports = {getGenres}
+module.exports = { getGenres }

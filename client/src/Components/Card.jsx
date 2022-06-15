@@ -1,9 +1,9 @@
 import React from "react";
-import"./Styles/Card.css"
+import "./Styles/Card.css"
 import { Link } from "react-router-dom";
 
 
-export default function Card({ image, name, genres,id,Genre}) {
+export default function Card({ image, name, genres, id }) {
 
     return (
         <div className="card" >
@@ -14,14 +14,14 @@ export default function Card({ image, name, genres,id,Genre}) {
                         <div className="name">
                             <p >{name}</p>
                         </div>
-                        <div className="genres">{genres}{Genre}</div>
+                        <div className="genres">{genres}</div>
                     </div>
-                    <div className ="details">
+                    <div className="details">
                         <Link to={"/videogame/" + id} >
                             <p >More info</p>
                         </Link>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     )

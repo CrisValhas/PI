@@ -7,8 +7,8 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey:true,
-      unique:true,
+      primaryKey: true,
+      unique: true,
     },
 
     name: {

@@ -16,7 +16,7 @@
 .card:hover{
     margin: 19px;
     box-shadow: 2px 2px 5px rgba(26, 104, 177, 0.705);
-    width: 21rem;
+    width: 20rem;
     height: 23rem;
     box-decoration-break: slice;
     background-color: rgba(26, 26, 26, 0.884);
