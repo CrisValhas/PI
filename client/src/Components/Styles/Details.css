@@ -1,14 +1,29 @@
 .back{
     background-color: rgb(17, 17, 17);
-    margin-bottom: 30px;
-    color :rgb(45, 45, 194)
+    color :rgb(255, 255, 255)
 }
 .fullimg{
     height: 60%;
     width: 60%;
+    border-radius: 7%;
+    margin-top: 10px;
 }
 .gen{
     color: aliceblue;
+    display: inline-flex;
     flex-direction: row;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+.bground{
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+}
+.item{
+    color: #23a6d5;
+}
+.des{
+    background-color: #4f4f4f;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 1%;
 }

@@ -9,15 +9,33 @@ function validate(input) {
   if (!input.name) {
     errors.name = "A name is required"
   }
+  if (input.name.length > 30){
+    errors.description = "A name is too long"
+  }
   if (!input.description) {
     errors.description = "A description is required"
+  }
+  if (input.description.length > 255){
+    errors.description = "A description is too long, only 255 characters"
   }
   if (input.rating > 5) {
     errors.rating = "The rating is up to 5"
   }
+  if (input.released.length < 10) {
+    errors.released = "A released is required"
+  }
+  if (input.platforms.length < 1) {
+    errors.platforms = "A platforms is required"
+  }
+  // if (input.genres.length < 1) {
+  //   errors.genres = "A genres is required" // no entiendo el error!!!! me rompe todo el form
+  // }
+  // if (input.name.length >0 && input.description.length >0 && input.released.length >0 && input.rating.length >0 && input.genre.length >0 && input.platforms.length >0){
+  //   alert("Video game created successfully!");
+  //   document.getElementById('created').setAttribute("disabled","disabled");
+  // }
+  // document.getElementById('created').removeAttribute("disabled"); //input type submit // clase camilo 24b forms
   return errors
-  //validate fecha
-  // /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/
 }
 
 export default function CreateVideogame() {
@@ -25,8 +43,6 @@ export default function CreateVideogame() {
   let dispatch = useDispatch();
   useEffect(() => { dispatch(getGenres()) }, []);
   let genres = useSelector(state => state.genres);
-
-
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
@@ -37,13 +53,18 @@ export default function CreateVideogame() {
     genre: [],
     platforms: [],
   });
+  const clickSucess =(e) =>{
+    if (errors.length>0){
+      alert("Video game created successfully!")// no me funciona 
+    }
 
+  };
   const handleclick = (e) => {
     e.preventDefault()
     dispatch(postVideogame(input))
 
 
-  }
+  };
   const handlepush = (e) => {
     if (e.target.name === "genre") {
       if (input.genre.length < 3) {
@@ -63,16 +84,15 @@ export default function CreateVideogame() {
           })
       }
     }
-  }
-  const handleDelete = e => {
+  };
+  const handleDelete = (e) => {
     e.preventDefault(e);
     setInput({
       ...input,
       [e.target.name]: input[e.target.name].filter(t => t !== e.target.value)
     });
   };
-
-  const handleInputChange = function (e) {
+  const handleInputChange =(e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value
@@ -81,7 +101,7 @@ export default function CreateVideogame() {
       ...input,
       [e.target.name]: e.target.value
     }))
-  }
+  };
 
   return (
     <div className='container'><Nav />
@@ -100,7 +120,8 @@ export default function CreateVideogame() {
             <div className='form'>
               <label>released </label>
               <input className={errors.released && 'danger'}
-                type="text" name="released" value={input.released} onChange={(e) => handleInputChange(e)} />
+                type="date"
+                name="released" value={input.released} onChange={(e) => handleInputChange(e)} />
               {errors.released && (
                 <p className="danger">{errors.released}</p>
               )}
@@ -108,13 +129,13 @@ export default function CreateVideogame() {
             <div className='form'>
               <label>Rating </label>
               <input className={errors.rating && 'danger'}
-                type="text" name="rating" value={input.rating} onChange={(e) => handleInputChange(e)} />
+                type="number" name="rating" value={input.rating} onChange={(e) => handleInputChange(e)} />
               {errors.rating && (
                 <p className="danger">{errors.rating}</p>
               )}
               <div className='form'>
                 <label>Platforms </label>
-                <select name="platforms" onChange={(e) => handlepush(e)}>
+                <select className={errors.platforms && 'danger'} name="platforms" onChange={(e) => handlepush(e)}>
                   <option value="PC" >PC</option>
                   <option value="PlayStation 5" >PlayStation 5</option>
                   <option value="PlayStation 4" >PlayStation 4</option>
@@ -128,14 +149,18 @@ export default function CreateVideogame() {
                   <option value="Nintendo Wii" >Nintendo Wii</option>
                   <option value="Nintendo Switch" >Wii</option>
                 </select>
+                {errors.platforms && (
+                <p className="danger">{errors.platforms}</p>)}
               </div>
               <div className='form'>
                 <label>Genres </label>
-                <select id="opciones" name="genre" onChange={(e) => handlepush(e)}>{
+                <select className={errors.rating && 'danger'} id="opciones" name="genre" onChange={(e) => handlepush(e)}>{
                   genres.length ? genres.map((genres, index) =>
                     (<option value={genres.name} key={index}>{genres.name}</option>)) : <option>sin generos cargados</option>
                 }
                 </select>
+                {errors.genres && (
+                <p className="danger">{errors.genres}</p>)}
               </div>
               <div className='form'>
                 <label>Description </label>
@@ -148,7 +173,7 @@ export default function CreateVideogame() {
             </div>
           </div>
           <div className='form'>
-            <button >Create</button>
+            <button id="created">Create</button>
           </div>
         </form>
       </div>

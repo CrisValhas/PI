@@ -3,21 +3,21 @@ require("dotenv").config();
 const { Videogame, Genre } = require('../../db.js');
 const { API_KEY } = process.env;
 
-
-
 const getVideoGamesId = async (req, res, next) => {
     const id = req.params.id
     try {
-        let gameDb = await Videogame.findByPk(id, {
-            include: {
-                model: Genre,
-                attributes: ["name"],
-                through: {
-                    attributes: []
+        if (id.length > 11){
+            let gameDb = await Videogame.findByPk(id, {
+                include: {
+                    model: Genre,
+                    attributes: ["name"],
+                    through: {
+                        attributes: []
+                    }
                 }
-            }
-        })
-        if (gameDb) { return res.status(200).send(gameDb) }
+            })
+            if (gameDb) { return res.status(200).send(gameDb) }
+        }
         let gameApi = await searchByIdApi(id)
         if (gameApi) { return res.status(200).send(gameApi) }
         return res.status(404).send("The videogame doesn't exist")
@@ -25,7 +25,6 @@ const getVideoGamesId = async (req, res, next) => {
         return next(error)
     }
 }
-
 const createGame = async (req, res, next) => {
     try {
         const { name, description, released, rating, image, platforms, genre } = req.body;
@@ -44,8 +43,6 @@ const createGame = async (req, res, next) => {
     }
 
 }
-
-
 const getApiVideogamesbyName = async (name) => {
     const apiURL = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)
     const apiInfo = apiURL.data.results.map(e => {
@@ -61,20 +58,19 @@ const getApiVideogamesbyName = async (name) => {
     })
     return apiInfo;
 }
-
 const searchByIdApi = async (id) => {
-    const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
-    const infoId = {
-        name: videogame.data.name,
-        released: videogame.data.released,
-        rating: videogame.data.rating,
-        image: videogame.data.background_image,
-        description: videogame.data.description_raw,
-        platforms: videogame.data.platforms.map(e => e.platform.name),
-        genres: videogame.data.genres.map(e => e.name)
+        const videogame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
+        const infoId = {
+            name: videogame.data.name,
+            released: videogame.data.released,
+            rating: videogame.data.rating,
+            image: videogame.data.background_image,
+            description: videogame.data.description_raw,
+            platforms: videogame.data.platforms.map(e => e.platform.name),
+            genres: videogame.data.genres.map(e => e.name)
+        }
+        return infoId;
     }
-    return infoId;
-}
 
 const getApi100Videogames = async () => {
     try {
@@ -99,7 +95,6 @@ const getApi100Videogames = async () => {
     }
 
 }
-
 const getDbVideogames = async () => {
     try {
         const prueba = await Videogame.findAll({
@@ -133,7 +128,6 @@ const getDbVideogames = async () => {
 
 
 }
-
 const getAll = async (req, res) => {
     let { name } = req.query;
     try {
@@ -158,6 +152,5 @@ const getAll = async (req, res) => {
         res.status(405).send(err);
     }
 }
-
 
 module.exports = { searchByIdApi, getApiVideogamesbyName, getDbVideogames, createGame, getVideoGamesId, getAll }

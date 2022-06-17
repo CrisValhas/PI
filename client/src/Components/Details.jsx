@@ -11,19 +11,19 @@ export default function Details() {
     useEffect(() => { dispatch(getDetails(id)) }, []);
     let details = useSelector(state => state.details);
 
-    return (  // details.length === 1 ?  
+    return ( 
         <div className="back">
             <div>
                 <Nav />
                 <div  >
                     <div>
-                        <div>
+                        <div className="bground">
                             <img className="fullimg" src={details.image} alt="" />
                             <div className="title">
                                 <p >{details.name} </p>
                             </div>
                         </div>
-                        Genres
+                        <label className="item">Genres :</label>
                         <div className="gen">{
                             details.genres ? details.genres.map((genre, index) =>
                                 (<p key={index} className="gen">{genre}</p>))
@@ -34,13 +34,13 @@ export default function Details() {
                                 (<p key={index} className="gen">{genre.name}</p>))
                                 : <div></div>}
                         </div>
-                        Platforms
+                        <label className="item">Platforms :</label>
                         <div className="gen">{
                             details.platforms ? details.platforms.map((details, index) =>
-                                (<p key={index} className="platforms">{details}</p>))
+                                (<p key={index} className="gen">{details}</p>))
                                 : <div>Sin plataformas asignadas</div>}
                         </div>
-                        <div className="gen">
+                        <div className="des">
                             {details.description}
                         </div>
                         <div className="gen">
@@ -53,8 +53,5 @@ export default function Details() {
                 </div>
             </div>
         </div>
-        //                                 : <div className='dmg'><img  src={loading} alt="" />
-        //                                         <p className="loading">Loading...</p>
-        //                                 </div>
     )
 };

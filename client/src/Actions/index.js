@@ -1,5 +1,16 @@
 import axios from "axios";
 
+
+export function reset() {
+    return {
+        type: "RESET",
+    }
+}
+export function clearCache(){
+    return{
+        type: "CLEARCACHE",
+    }
+}
 export function getAllVideogames() {
     return async function (dispatch) {
         try {
@@ -28,7 +39,6 @@ export function getVideogamesByName(payload) {
         }
     }
 }
-
 export function getGenres() {
     return async function (dispatch) {
         try {
@@ -42,8 +52,6 @@ export function getGenres() {
         }
     }
 }
-
-
 export function postVideogame(payload) {
     return async function () {
         try {
@@ -57,7 +65,6 @@ export function postVideogame(payload) {
         }
     }
 }
-
 export function getDetails(payload) {
     return async function (dispatch) {
         try {
@@ -71,14 +78,12 @@ export function getDetails(payload) {
         }
     }
 }
-
 export function filterByGenre(payload) {
     return {
         type: "FILTER_BY_GENRE",
         payload
     }
 }
-
 export function filterByDborApi(payload) {
 
     return {
@@ -86,14 +91,12 @@ export function filterByDborApi(payload) {
         payload
     }
 }
-
 export function orderByName(payload) {
     return {
         type: "ORDER_BY_NAME",
         payload
     }
 }
-
 export function orderByRating(payload) {
     return {
         type: "ORDER_BY_RATING",

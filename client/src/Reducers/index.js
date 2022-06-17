@@ -1,4 +1,5 @@
 const initialState = {
+    loading : true,
     allVideogames: [],
     videogames: [],
     genres: [],
@@ -16,6 +17,17 @@ let doubleFilters = false;
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
+        case "CLEARCACHE":
+            return{
+                ...state,
+                loading: false,
+                videogames: "Searching",
+            };
+        case "RESET":
+            return{
+                ...state,
+                videogames: state.allVideogames,
+            };
         case "GET_ALL_VIDEOGAMES":
             filtroByDbApi = false;
             filtroByGenre = false;
@@ -24,12 +36,14 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 videogames: action.payload,
                 allVideogames: action.payload,
+                loading : false,
                 details: [],
             };
         case "GET_VIDEOGAMES_BY_NAME":
             return {
                 ...state,
                 videogames: action.payload,
+                loading : false,
             };
         case "GET_GENRES":
             return {
@@ -56,6 +70,11 @@ function rootReducer(state = initialState, action) {
                     if (e.genres.includes(action.payload)) {
                         genrefiltered.push(e);
                     }
+                    if (e.genres){
+                        if (e.genres[0].name){
+                            e.genres.forEach((g)=> ((g.name) === (action.payload))? genrefiltered.push(e): null)
+                        };
+                    }
                 });
                 if (genrefiltered.length > 0) {
                     doubleFilters = true;
@@ -67,7 +86,7 @@ function rootReducer(state = initialState, action) {
                 } else {
                     return {
                         ...state,
-                        videogames: filteredByDb,
+                        videogames: genrefiltered,
                     };
                 }
             } else {
@@ -75,8 +94,13 @@ function rootReducer(state = initialState, action) {
                     if (e.genres) {
                         if (e.genres.includes(action.payload)) {
                             genrefiltered.push(e);
+                        }};
+                        if (e.genres.length < 0){
+                            console.log(e)
+                            if (e.genres[0].name){
+                                e.genres.forEach((g)=> ((g.name) === (action.payload))? genrefiltered.push(e): null)
+                            };
                         }
-                    }
                 });
                 if (genrefiltered.length > 0) {
                     return {
@@ -87,11 +111,10 @@ function rootReducer(state = initialState, action) {
                 } else {
                     return {
                         ...state,
-                        videogames,
+                        videogames :genrefiltered,
                     };
                 }
-            }
-
+            };
         case "FILTER_BY_DB_OR_API":
             filtroByDbApi = true;
             if (filtroByGenre === true) {
@@ -121,7 +144,7 @@ function rootReducer(state = initialState, action) {
                         videogames,
                     };
                 } else {
-                    const allVideogames = state.allVideogames;
+                    const allVideogames = state.videogames;
                     const videogamesfiltered =
                         action.payload === "DB"
                             ? allVideogames.filter((e) => e.createdInDb)
@@ -132,8 +155,7 @@ function rootReducer(state = initialState, action) {
                         videogames: videogamesfiltered,
                     };
                 }
-            }
-
+            };
         case "ORDER_BY_NAME":
             if (filtroByDbApi === true && doubleFilters === false) {
                 const filteredByDb = state.filteredByDb;
@@ -271,7 +293,7 @@ function rootReducer(state = initialState, action) {
                         videogames: sortVideogameByName,
                     };
                 }
-            }
+            };
         case "ORDER_BY_RATING":
             if (filtroByDbApi === true && doubleFilters === false) {
                 const filteredByDb = state.filteredByDb;
@@ -409,8 +431,7 @@ function rootReducer(state = initialState, action) {
                         videogames: sortByRating,
                     };
                 }
-            }
-
+            };
         default:
             return state;
     }

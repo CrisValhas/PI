@@ -33,3 +33,7 @@ display: inline-flex;
     width: 30%;
     height: 70px;
 }
+.danger{
+    color: red;
+    
+}

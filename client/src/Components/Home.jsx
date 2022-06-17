@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
-import {
-        getVideogamesByName,
-        getAllVideogames,
-        orderByName,
-        orderByRating,
-        filterByGenre,
-        filterByDborApi,
-} from "../Actions/index";
+import {getVideogamesByName,orderByName,orderByRating,filterByGenre,filterByDborApi, clearCache, getAllVideogames} from "../Actions/index";
 import "./Styles/Home.css";
 import Nav from "./Nav";
 import loading from "../Media/dmc.gif";
@@ -18,27 +11,23 @@ export default function Home() {
 
         const dispatch = useDispatch();
         let pagin =useSelector((state) => state.videogames);
+        let load = useSelector((state)=> state.loading);
         const [state, setState] = useState({
                 order:[],
                 search:"",
-                
         });
         const [currentPage, setCurrentPage] = useState(1);
         const [videogamesPerPage] = useState(15);
         const indexOfLastVideogame = currentPage * videogamesPerPage;
         const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
-        const currentVideogames = pagin.slice(
-                indexOfFirstVideogame,
-                indexOfLastVideogame
-        );
+        const currentVideogames = pagin.slice(indexOfFirstVideogame,indexOfLastVideogame);
         const lastPage = Math.ceil(pagin.length / 15);
-        // const [search, setSearch] = useState();
-        let genres = useSelector((state) => state.genres);
+        const genres = useSelector((state) => state.genres);
 
-        const paginado = (pageNumber) => {
+        function paginado(pageNumber) {
                 setCurrentPage(pageNumber);
         };
-        const handlePrevNext = (e) => {
+        function handlePrevNext(e) {
                 e.preventDefault(e);
                 switch (e.target.name) {
                         case "prev":
@@ -57,6 +46,7 @@ export default function Home() {
         };
         function handleClick(e) {
                 e.preventDefault(e);
+                dispatch(clearCache());
                 dispatch(getAllVideogames());
                 setCurrentPage(1);
                 document.getElementById('OrderByName').removeAttribute("disabled");
@@ -109,7 +99,7 @@ export default function Home() {
                         });
                 };
                 document.getElementById('Genres').value="Genres";
-                document.getElementById('Genres').setAttribute("disabled","disabled");
+                // document.getElementById('Genres').setAttribute("disabled","disabled");// me gusta mas el resultado aunque sea solo 1 genero
         };
         function handleFilterDbApi(e) {
                 e.preventDefault(e);
@@ -132,15 +122,16 @@ export default function Home() {
         };
         function handleSubmit(e) {
                 e.preventDefault(e);
-                console.log(state)
+                dispatch(clearCache());
                 dispatch(getVideogamesByName(state.search));
                 setState({ 
                         ...state,
-                        search: "" });
-                // pagin =[];
-        }
+                        search: "",
+                });       
+        };
 
-        return (pagin.length > 0 ? 
+        return (load === false ? pagin === "Searching"? <div className="dmg"><img src={loading} alt="" /><p className="loading">Performing actions... please wait</p></div> 
+        :
                 <div className="searchbar">
                         <Nav />
                         <div>
