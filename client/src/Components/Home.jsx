@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./Card";
-import {getVideogamesByName,orderByName,orderByRating,filterByGenre,filterByDborApi, clearCache, getAllVideogames} from "../Actions/index";
+import {getVideogamesByName,orderByName,orderByRating,filterByGenre,filterByDborApi, clearCache,getAllVideogames, getGenres } from "../Actions/index";
 import "./Styles/Home.css";
 import Nav from "./Nav";
 import loading from "../Media/dmc.gif";
@@ -10,6 +10,8 @@ import Pagin from "./Pagin";
 export default function Home() {
 
         const dispatch = useDispatch();
+        useEffect(() => { dispatch(getAllVideogames())},[dispatch]);
+        useEffect(() => { dispatch(getGenres())},[dispatch]);
         let pagin =useSelector((state) => state.videogames);
         let load = useSelector((state)=> state.loading);
         const [state, setState] = useState({

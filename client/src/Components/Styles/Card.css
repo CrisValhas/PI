@@ -16,8 +16,8 @@
 .card:hover{
     margin: 19px;
     box-shadow: 2px 2px 5px rgba(26, 104, 177, 0.705);
-    width: 20rem;
-    height: 23rem;
+    transform: scale(1.05);
+    transition: transform .5s;
     box-decoration-break: slice;
     background-color: rgba(26, 26, 26, 0.884);
     border-radius: 3%;
@@ -25,10 +25,9 @@
     border-color: rgb(199, 156, 14);
     border-style:solid;
     align-items: center;
-    transition: 10ms;
-    background: linear-gradient(-45deg, #eed752, #e3f829, #d52323, #ffa723);
+    background: linear-gradient(-45deg, #e3f829, #ffa723, #d52323, #ffa723);
     background-size: 200% 200%;
-    animation: gradient 5s ease infinite;
+    animation: gradient 2.5s ease infinite;
 }
 
 @keyframes gradient {

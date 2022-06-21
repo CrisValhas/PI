@@ -1,6 +1,33 @@
 import axios from "axios";
 
+//                         ... a promesas
+//                  -----------------------------------
+// export const deleteVideogame = (payload) => dispatch =>{
+// return axios.delete("http://localhost:3001/videogame/" + payload.id)
+// .then(r => r.json())
+// .then( json => {
+//     dispatch({
+//         type: "DELETE_VIDEOGAME",
+//         payload: json.data
+//         }
+//     )
+//     }
+// ).catch((error)=> console.log(error))
+// };
 
+export function deleteVideogame(payload){
+    return async function (dispatch) {
+        try {
+            var json = await axios.delete("http://localhost:3001/videogame/" + payload.id)
+            return dispatch({
+                type: "DELETE_VIDEOGAME",
+                payload: json.data
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+}
 export function reset() {
     return {
         type: "RESET",
@@ -29,7 +56,6 @@ export function getVideogamesByName(payload) {
     return async function (dispatch) {
         try {
             var json = await axios.get("http://localhost:3001/videogames?name=" + payload)
-
             return dispatch({
                 type: "GET_VIDEOGAMES_BY_NAME",
                 payload: json.data

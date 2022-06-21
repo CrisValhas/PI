@@ -2,8 +2,9 @@ import './App.css';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Landing from './Components/Landing.jsx'
 import Home from './Components/Home.jsx'
-import CreateVideogame from './Components/CreateVideogame.jsx'
-import Details from './Components/Details.jsx'
+import Notfound from'./Components/Notfound.jsx'
+import Details from './Components/Details'
+import CreateVideogame from './Components/CreateVideogame';
 
 
 
@@ -12,10 +13,11 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Landing />}/>
-          <Route path='/home' element={<Home/>} />
-          <Route path='/videogame' element={<CreateVideogame />} /> 
-          <Route path='/videogame/:id' element={<Details />} />
+          <Route exact path='/' element={<Landing />}/>
+          <Route exact path='/home' element={<Home/>} />
+          <Route exact path='/videogame/:id' element={<Details/>} />
+          <Route exact path='/createvideogame' element={<CreateVideogame/>} />
+          <Route path='*' element={<Notfound />}/>
         </Routes>
       </div>
     </BrowserRouter>

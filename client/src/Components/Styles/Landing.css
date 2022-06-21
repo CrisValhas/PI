@@ -8,11 +8,15 @@
     position: relative;
     border-radius: 5px;
     border-style: inset;
+    border-radius: 7%;
     
 }
 .landingImg:hover {
     background-color: rgba(255, 196, 0, 0.637);
-    transition: background-color .5s;
+    transition: background-color 1.4s;
+    transform: scale(1.5);
+    transition: transform .9s;
+    border-radius: 7%;
 }
 .landing{
     background-color: #000000;

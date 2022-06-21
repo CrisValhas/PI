@@ -3,6 +3,19 @@ require("dotenv").config();
 const { Videogame, Genre } = require('../../db.js');
 const { API_KEY } = process.env;
 
+const deleteVideogame= async(req,res)=>{
+    try {
+        const id = req.params.id 
+        await Videogame.destroy({
+            where:{
+                id: id
+            }
+        })
+        return res.status(200).send({msg: "Videogame deleted successfully"})
+    } catch (error) {
+        res.status(404).send(error)
+    }
+}
 const getVideoGamesId = async (req, res, next) => {
     const id = req.params.id
     try {
@@ -31,7 +44,7 @@ const createGame = async (req, res, next) => {
         const genreid = await Genre.findAll({ where: { name: genre } })
         const newgame = await Videogame.findOne({ where: { name: name } })
         if (newgame) {
-            return res.status(404).send("this game is already exist")
+            return res.status(404).send({msg :"this game is already exist"})
         }
         const videogameCreated = await Videogame.create({ name, description, released, rating, image, platforms })
         await videogameCreated.addGenres(genre);
@@ -70,8 +83,7 @@ const searchByIdApi = async (id) => {
             genres: videogame.data.genres.map(e => e.name)
         }
         return infoId;
-    }
-
+}
 const getApi100Videogames = async () => {
     try {
         const apiURL1 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
@@ -153,4 +165,4 @@ const getAll = async (req, res) => {
     }
 }
 
-module.exports = { searchByIdApi, getApiVideogamesbyName, getDbVideogames, createGame, getVideoGamesId, getAll }
+module.exports = { searchByIdApi, getApiVideogamesbyName, getDbVideogames, createGame, getVideoGamesId,deleteVideogame, getAll }

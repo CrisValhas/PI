@@ -28,7 +28,7 @@ export default function Nav() {
                         </Link>
                     </li>
                     <li className="list-item">
-                        <Link to="/videogame" >
+                        <Link to="/createvideogame" >
                             Create Videogames
                         </Link>
                     </li>
