@@ -60,13 +60,13 @@ const getApiVideogamesbyName = async (name) => {
     const apiURL = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`)
     const apiInfo = apiURL.data.results.map(e => {
         return {
-            id: e.id,
-            name: e.name,
-            released: e.released,
-            rating: e.rating,
-            image: e.background_image,
-            platforms: e.platforms.map(e => e.platform.name),
-            genres: e.genres.map(e => e.name)
+            id: e.id? e.id :"sin id",
+            name: e.name? e.name :"sin name",
+            released: e.released? e.released :"sin released",
+            rating: e.rating? e.rating :"sin rating",
+            image: e.background_image? e.background_image :"sin background_image",
+            platforms: e.platforms? e.platforms.map(e => e.platform.name): "sin platforms",
+            genres: e.genres? e.genres.map(e => e.name): "sin genres"
         }
     })
     return apiInfo;

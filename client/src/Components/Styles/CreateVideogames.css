@@ -37,3 +37,20 @@ display: inline-flex;
     color: red;
     
 }
+.btn{
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border-radius: 7px;
+    font-style: oblique;
+    font-weight: bolder;
+    border-color: aliceblue;
+    color: aliceblue;
+}
+.btn:hover{
+    background: linear-gradient(-90deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border-radius: 7px;
+    font-style: oblique;
+    font-weight: bolder;
+    border-color: aliceblue;
+    color: aliceblue;
+    transform: scale(1.1);
+}

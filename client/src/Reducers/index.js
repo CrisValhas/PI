@@ -1,5 +1,4 @@
 const initialState = {
-    alreadyExist: false,
     loading : true,
     allVideogames: [],
     videogames: [],

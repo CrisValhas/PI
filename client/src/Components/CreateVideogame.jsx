@@ -33,8 +33,7 @@ export default function CreateVideogame() {
   let dispatch = useDispatch();
   useEffect(() => { dispatch(getGenres()) }, [dispatch]);
   let genres = useSelector(state => state.genres);
-  // let alreadyExist=useSelector(state => state.alreadyExist);
-  // console.log(alreadyExist)
+
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
@@ -49,21 +48,30 @@ export default function CreateVideogame() {
     e.preventDefault(e)
     if (!input.name||!input.description||!input.released||!input.rating||input.genre.length<1||input.platforms.length<1) alert("some empty value")
     else{
-      dispatch(postVideogame(input))
-      alert("videogame created successfully")
+      dispatch(postVideogame(input)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             )
       document.getElementById("released").value=""
       document.getElementById("rating").value=""
       document.getElementById("platforms").value=""
       document.getElementById("description").value=""
       document.getElementById("opciones").value=""
       document.getElementById("name").value=""
+      setInput({
+        ...input,
+          name: "",
+          description: "",
+          image: "",
+          released: "",
+          rating: "",
+          genre: [],
+          platforms: [],
+      })
     } 
   };
   const handlepush = (e) => {
     
     if (e.target.name === "genre") {
       if (input.genre.length < 3) {
-        if (!input.genre.includes(e.target.name))
+        if (!input.genre.includes(e.target.value))
           setInput({
             ...input,
             [e.target.name]: [...input[e.target.name], e.target.value]
@@ -72,7 +80,7 @@ export default function CreateVideogame() {
     }
     if (e.target.name === "platforms") {
       if (input.platforms.length < 6) {
-        if (!input.platforms.includes(e.target.name))
+        if (!input.platforms.includes(e.target.value))
           setInput({
             ...input,
             [e.target.name]: [...input[e.target.name], e.target.value]

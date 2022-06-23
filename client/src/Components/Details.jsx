@@ -11,8 +11,7 @@ export default function Details() {
     let id = useParams("id");
     let dispatch = useDispatch();
     useEffect(() => { dispatch(getDetails(id)) }, [id,dispatch]);
-    let details = useSelector(state => state.details);
-    console.log(details)
+    let details = useSelector(state => state.details)
 
     function handleClick(e) {
         e.preventDefault(e);

@@ -8,7 +8,7 @@ export default function Card({ image, name, genres, id }) {
     return (
         <div className="card" >
             <div className="row">
-                <div>
+                <div className="src">
                     <img className="src" src={image} alt="" />
                     <div>
                         <div className="name">

@@ -82,12 +82,14 @@ export function postVideogame(payload) {
     return async function () {
         try {
             var json = await axios.post("http://localhost:3001/videogame", payload)
-            return {
-                type: "POST_VIDEOGAME",
-                json
-            }
+            if (json)
+            return (alert("videogame created successfully"))
         } catch (e) {
-            console.log(e)
+            if(e.response.data.msg){
+                return (alert(e.response.data.msg))
+                    
+            }
+            // console.log(e)
         }
     }
 }
