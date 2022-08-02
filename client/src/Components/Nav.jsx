@@ -14,6 +14,7 @@ export default function Nav() {
         dispatch(getAllVideogames());
     }
     return (
+        
         <header className="navbar">
             <div>
                 <Link to="/" >
