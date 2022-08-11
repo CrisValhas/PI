@@ -3,7 +3,7 @@ import axios from "axios";
 //                         ... a promesas
 //                  -----------------------------------
 // export const deleteVideogame = (payload) => dispatch =>{
-// return axios.delete("https://videogames-app-henrybootcamp.herokuapp.com/videogame/" + payload.id)
+// return axios.delete("https://videogames-app-henry.herokuapp.com/" + payload.id)
 // .then(r => r.json())
 // .then( json => {
 //     dispatch({
@@ -18,7 +18,7 @@ import axios from "axios";
 export function deleteVideogame(payload){
     return async function (dispatch) {
         try {
-            var json = await axios.delete("https://videogames-app-henrybootcamp.herokuapp.com/videogame/" + payload.id)
+            var json = await axios.delete("https://videogames-app-henry.herokuapp.com/videogame/" + payload.id)
             return dispatch({
                 type: "DELETE_VIDEOGAME",
                 payload: json.data
@@ -41,7 +41,7 @@ export function clearCache(){
 export function getAllVideogames() {
     return async function (dispatch) {
         try {
-            var json = await axios.get("https://videogames-app-henrybootcamp.herokuapp.com/videogames")
+            var json = await axios.get("https://videogames-app-henry.herokuapp.com/videogames")
             return dispatch({
                 type: "GET_ALL_VIDEOGAMES",
                 payload: json.data
@@ -55,7 +55,7 @@ export function getAllVideogames() {
 export function getVideogamesByName(payload) {
     return async function (dispatch) {
         try {
-            var json = await axios.get("https://videogames-app-henrybootcamp.herokuapp.com/videogames?name=" + payload)
+            var json = await axios.get("https://videogames-app-henry.herokuapp.com/videogames?name=" + payload)
             return dispatch({
                 type: "GET_VIDEOGAMES_BY_NAME",
                 payload: json.data
@@ -68,7 +68,7 @@ export function getVideogamesByName(payload) {
 export function getGenres() {
     return async function (dispatch) {
         try {
-            var json = await axios.get("https://videogames-app-henrybootcamp.herokuapp.com/genres")
+            var json = await axios.get("https://videogames-app-henry.herokuapp.com/genres")
             return dispatch({
                 type: "GET_GENRES",
                 payload: json.data
@@ -81,7 +81,7 @@ export function getGenres() {
 export function postVideogame(payload) {
     return async function () {
         try {
-            var json = await axios.post("https://videogames-app-henrybootcamp.herokuapp.com/videogame", payload)
+            var json = await axios.post("https://videogames-app-henry.herokuapp.com/videogame", payload)
             if (json)
             return (alert("videogame created successfully"))
         } catch (e) {
@@ -96,7 +96,7 @@ export function postVideogame(payload) {
 export function getDetails(payload) {
     return async function (dispatch) {
         try {
-            var json = await axios.get("https://videogames-app-henrybootcamp.herokuapp.com/videogame/" + payload.id)
+            var json = await axios.get("https://videogames-app-henry.herokuapp.com/videogame/" + payload.id)
             return dispatch({
                 type: "GET_DETAILS",
                 payload: json.data
